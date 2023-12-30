@@ -5,8 +5,8 @@ import { Footer } from "./_components/Footer";
 
 const MarketingPage = () => {
 	return (
-		<div className="flex flex-col">
-			<div className="px-6 flex-1 gap-y-8 flex flex-col pb-10 w-full justify-center md:justify-start items-center  text-center">
+		<div className="flex flex-col min-h-full">
+			<div className="min-h-full px-6 flex-1 gap-y-8 flex flex-col pb-10 w-full justify-center md:justify-start items-center  text-center">
 				<Heading />
 				<Heroes />
 			</div>

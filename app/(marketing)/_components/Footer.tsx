@@ -17,7 +17,6 @@ export const Footer = () => {
 				<Button
 					size="sm"
 					variant="ghost"
-
 				>
 					Terms & Conditions
 				</Button>
