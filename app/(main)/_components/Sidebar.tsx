@@ -4,7 +4,7 @@ import { ChevronsLeft, MenuIcon } from "lucide-react";
 import { UserItem } from "./UserItem";
 import { ElementRef, use, useEffect, useRef, useState } from "react";
 import { cn } from "@/lib/utils";
-import { useMediaQuery } from "usehooks-ts";
+import { useMediaQuery } from "@/hooks/use-media-query"
 import { usePathname } from "next/navigation";
 
 
@@ -27,6 +27,7 @@ export const Sidebar = () => {
 		} else {
 			resetWidth();
 		}
+	// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [isMobile]);
 
 	useEffect(() => {
