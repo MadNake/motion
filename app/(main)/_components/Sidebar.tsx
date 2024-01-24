@@ -27,7 +27,7 @@ export const Sidebar = () => {
 		} else {
 			resetWidth();
 		}
-	// eslint-disable-next-line react-hooks/exhaustive-deps
+		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [isMobile]);
 
 	useEffect(() => {
@@ -97,7 +97,7 @@ export const Sidebar = () => {
 
 			sidebarRef.current.style.width = "0";
 			// navbarRef.current.style.setProperty("width", "100%");
-			navbarRef.current.style.width =  "100%";
+			navbarRef.current.style.width = "100%";
 			// navbarRef.current.style.setProperty("left", "0");
 			navbarRef.current.style.left = "0";
 			setTimeout(() => setIsResetting(false), 300);
@@ -117,7 +117,9 @@ export const Sidebar = () => {
 					className="absolute rounded-sm right-2 top-3 text-muted-foreground opacity-0 group-hover/sidebar:opacity-100 transition hover:bg-neutral-300 h-6 w-6 dark:hover:bg-neutral-600">
 					<ChevronsLeft className="h-6 w-6" />
 				</div>
-				<UserItem />
+				<div>
+					<UserItem />
+				</div>
 				<div>
 					action buttons
 				</div>
