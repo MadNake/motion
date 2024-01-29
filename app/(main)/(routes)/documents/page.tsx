@@ -6,10 +6,26 @@ import { PlusCircle } from "lucide-react";
 import Image from "next/image";
 
 import { useUser } from "@clerk/clerk-react";
+import { useMutation } from "convex/react";
+import { api } from "@/convex/_generated/api";
+import { toast } from "sonner";
 
 const DocumentsPage = () => {
 
 	const { user } = useUser();
+	const create = useMutation(api.documents.create);
+
+	const onCreate = () => {
+		const promise = create({
+			title: "Untitled"
+		});
+
+		toast.promise(promise, {
+			loading: "Creating a new note...",
+			success: "New note created!",
+			error: "Failed to create a new note."
+		});
+	}
 
 	return (
 		<div className="relative flex items-center justify-center h-full flex-col space-y-4">
@@ -31,8 +47,10 @@ const DocumentsPage = () => {
 				className="text-lg font-medium">
 				Welcom to {user?.firstName}&apos;s Motion
 			</h2>
-			<Button>
-				<PlusCircle className="h-4 w-4 mr-2"/>
+			<Button
+				onClick={onCreate}
+			>
+				<PlusCircle className="h-4 w-4 mr-2" />
 				Create a note
 			</Button>
 		</div>

@@ -6,6 +6,7 @@ import { ElementRef, use, useEffect, useRef, useState } from "react";
 import { cn } from "@/lib/utils";
 import { useMediaQuery } from "@/hooks/use-media-query"
 import { usePathname } from "next/navigation";
+import { Documents } from "./Documents";
 
 
 export const Sidebar = () => {
@@ -124,7 +125,7 @@ export const Sidebar = () => {
 					action buttons
 				</div>
 				<div className="mt-4">
-					documents
+					<Documents />
 				</div>
 				<div className="mt-4">
 					Trash
