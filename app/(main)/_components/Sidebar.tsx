@@ -1,12 +1,19 @@
 "use client"
 
-import { ChevronsLeft, MenuIcon } from "lucide-react";
-import { UserItem } from "./UserItem";
-import { ElementRef, use, useEffect, useRef, useState } from "react";
-import { cn } from "@/lib/utils";
-import { useMediaQuery } from "@/hooks/use-media-query"
+import { ElementRef, useEffect, useRef, useState } from "react";
 import { usePathname } from "next/navigation";
-import { Documents } from "./Documents";
+import { useMediaQuery } from "@/hooks/use-media-query"
+import { useMutation } from "convex/react";
+import { toast } from "sonner";
+
+import { cn } from "@/lib/utils";
+import { api } from "@/convex/_generated/api";
+
+import { ChevronsLeft, MenuIcon, Plus, PlusCircle, Search, Settings } from "lucide-react";
+
+import { UserItem } from "./UserItem";
+import { DocumentsList } from "./DocumentsList";
+import { Item } from "./Item";
 
 
 export const Sidebar = () => {
@@ -21,6 +28,8 @@ export const Sidebar = () => {
 	const isResizingRef = useRef(false);
 	const sidebarRef = useRef<ElementRef<"aside">>(null);
 	const navbarRef = useRef<ElementRef<"div">>(null);
+
+	const create = useMutation(api.documents.create);
 
 	useEffect(() => {
 		if (isMobile) {
@@ -105,6 +114,18 @@ export const Sidebar = () => {
 		}
 	};
 
+	const handleCreate = () => {
+		const promise = create({
+			title: "Untitled"
+		});
+
+		toast.promise(promise, {
+			loading: "Creating a new note...",
+			success: "New note created!",
+			error: "Failed to create a new note."
+		});
+	}
+
 	return (
 		<>
 			<aside
@@ -112,24 +133,42 @@ export const Sidebar = () => {
 				className={cn("bg-secondary w-60 flex flex-col relative group/sidebar overflow-y-auto z-[99999]",
 					isMobile && "w-0",
 					isResetting && "transition-all ease-in-out duration-300")}>
-				<div
-					role="button"
-					onClick={collapse}
-					className="absolute rounded-sm right-2 top-3 text-muted-foreground opacity-0 group-hover/sidebar:opacity-100 transition hover:bg-neutral-300 h-6 w-6 dark:hover:bg-neutral-600">
-					<ChevronsLeft className="h-6 w-6" />
-				</div>
 				<div>
+					<div
+						role="button"
+						onClick={collapse}
+						className="absolute rounded-sm right-2 top-3 text-muted-foreground opacity-0 group-hover/sidebar:opacity-100 transition hover:bg-neutral-300 h-6 w-6 dark:hover:bg-neutral-600">
+						<ChevronsLeft className="h-6 w-6" />
+					</div>
 					<UserItem />
+					<Item
+						onClick={() => {}}
+						label="Search"
+						icon={Search}
+						isSearch
+					/>
+					<Item
+						onClick={() => {}}
+						label="Settings"
+						icon={Settings}
+					/>
+					<Item
+						onClick={handleCreate}
+						label="New page"
+						icon={PlusCircle}
+					/>
 				</div>
-				<div>
-					action buttons
-				</div>
+
 				<div className="mt-4">
-					<Documents />
-				</div>
-				<div className="mt-4">
+					<DocumentsList />
+					<Item
+						onClick={handleCreate}
+						icon={Plus}
+						label="Add a page"
+					/>
 					Trash
 				</div>
+
 				<div
 					onMouseDown={handleMouseDown}
 					onClick={resetWidth}
