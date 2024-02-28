@@ -29,9 +29,11 @@ import { DocumentsList } from "./DocumentsList";
 import { Item } from "./Item";
 import { TrashBox } from "./TrashBox";
 import { useSearch } from "@/hooks/use-search";
+import { useSettings } from "@/hooks/use-settings";
 
 export const Sidebar = () => {
 	const search = useSearch();
+	const settings = useSettings();
 	const pathname = usePathname();
 
 	const isMobile = useMediaQuery("(max-width: 768px)");
@@ -159,7 +161,7 @@ export const Sidebar = () => {
 					</div>
 					<UserItem />
 					<Item onClick={search.onOpen} label="Search" icon={Search} isSearch />
-					<Item onClick={() => {}} label="Settings" icon={Settings} />
+					<Item onClick={settings.onOpen} label="Settings" icon={Settings} />
 					<Item onClick={handleCreate} label="New page" icon={PlusCircle} />
 				</div>
 
