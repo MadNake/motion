@@ -28,8 +28,10 @@ import { UserItem } from "./UserItem";
 import { DocumentsList } from "./DocumentsList";
 import { Item } from "./Item";
 import { TrashBox } from "./TrashBox";
+import { useSearch } from "@/hooks/use-search";
 
 export const Sidebar = () => {
+	const search = useSearch();
 	const pathname = usePathname();
 
 	const isMobile = useMediaQuery("(max-width: 768px)");
@@ -156,7 +158,7 @@ export const Sidebar = () => {
 						<ChevronsLeft className="h-6 w-6" />
 					</div>
 					<UserItem />
-					<Item onClick={() => {}} label="Search" icon={Search} isSearch />
+					<Item onClick={search.onOpen} label="Search" icon={Search} isSearch />
 					<Item onClick={() => {}} label="Settings" icon={Settings} />
 					<Item onClick={handleCreate} label="New page" icon={PlusCircle} />
 				</div>
