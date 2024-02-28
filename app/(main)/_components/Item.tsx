@@ -52,6 +52,19 @@ export const Item = ({
 	const { user } = useUser();
 
 	const create = useMutation(api.documents.create);
+	const archive = useMutation(api.documents.archive);
+
+	const onArchive = (event: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
+		event.stopPropagation();
+		if (!id) return;
+		const promise = archive({ id });
+
+		toast.promise(promise, {
+			loading: "Moving to trash...",
+			success: "Note moved to trash!",
+			error: "Failed to archive note.",
+		});
+	};
 
 	const handleExpand = (
 		event: React.MouseEvent<HTMLDivElement, MouseEvent>,
@@ -120,11 +133,13 @@ export const Item = ({
 			{!!id && (
 				<div className="ml-auto flex items-center gap-x-2">
 					<DropdownMenu>
-						<DropdownMenuTrigger
-							className="opacity-0 group-hover:opacity-100 rounded-sm hover:bg-neutral-300 dark:bg-neutral-600"
-							asChild
-						>
-							<MoreHorizontal className="h-4 w-4 text-muted-foreground" />
+						<DropdownMenuTrigger asChild onClick={(e) => e.stopPropagation()}>
+							<div
+								className="opacity-0 group-hover:opacity-100 rounded-sm hover:bg-neutral-300 dark:bg-neutral-600 h-full ml-auto"
+								role="button"
+							>
+								<MoreHorizontal className="h-4 w-4 text-muted-foreground" />
+							</div>
 						</DropdownMenuTrigger>
 						<DropdownMenuContent
 							className="w-60"
@@ -132,7 +147,7 @@ export const Item = ({
 							side="right"
 							forceMount
 						>
-							<DropdownMenuItem>
+							<DropdownMenuItem onClick={onArchive}>
 								<Trash className="w-4 h-4 mr-2" />
 								Delete
 							</DropdownMenuItem>
