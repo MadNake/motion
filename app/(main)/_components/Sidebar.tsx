@@ -1,7 +1,7 @@
 "use client";
 
 import { ElementRef, useEffect, useRef, useState } from "react";
-import { usePathname } from "next/navigation";
+import { useParams, usePathname } from "next/navigation";
 import { useMediaQuery } from "@/hooks/use-media-query";
 import { useMutation } from "convex/react";
 import { toast } from "sonner";
@@ -30,11 +30,13 @@ import { Item } from "./Item";
 import { TrashBox } from "./TrashBox";
 import { useSearch } from "@/hooks/use-search";
 import { useSettings } from "@/hooks/use-settings";
+import { Navbar } from "./Navbar";
 
 export const Sidebar = () => {
 	const search = useSearch();
 	const settings = useSettings();
 	const pathname = usePathname();
+	const params = useParams();
 
 	const isMobile = useMediaQuery("(max-width: 768px)");
 
@@ -196,20 +198,24 @@ export const Sidebar = () => {
 					isMobile && "left-0 w-full",
 				)}
 			>
-				<nav
-					className={cn(
-						"bg-transparent px-3 py-2 w-full",
-						!isCollapsed && "hidden",
-					)}
-				>
-					{isCollapsed && (
-						<MenuIcon
-							className="h-6 w-6 text-muted-foreground"
-							role="button"
-							onClick={resetWidth}
-						/>
-					)}
-				</nav>
+				{params.documentId ? (
+					<Navbar isCollapsed={isCollapsed} onResetWidth={resetWidth} />
+				) : (
+					<nav
+						className={cn(
+							"bg-transparent px-3 py-2 w-full",
+							!isCollapsed && "hidden",
+						)}
+					>
+						{isCollapsed && (
+							<MenuIcon
+								className="h-6 w-6 text-muted-foreground"
+								role="button"
+								onClick={resetWidth}
+							/>
+						)}
+					</nav>
+				)}
 			</div>
 		</>
 	);
