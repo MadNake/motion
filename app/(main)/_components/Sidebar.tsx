@@ -10,17 +10,24 @@ import { cn } from "@/lib/utils";
 import { api } from "@/convex/_generated/api";
 
 import {
+	Popover,
+	PopoverTrigger,
+	PopoverContent,
+} from "@/components/ui/popover";
+import {
 	ChevronsLeft,
 	MenuIcon,
 	Plus,
 	PlusCircle,
 	Search,
 	Settings,
+	Trash,
 } from "lucide-react";
 
 import { UserItem } from "./UserItem";
 import { DocumentsList } from "./DocumentsList";
 import { Item } from "./Item";
+import { TrashBox } from "./TrashBox";
 
 export const Sidebar = () => {
 	const pathname = usePathname();
@@ -157,7 +164,17 @@ export const Sidebar = () => {
 				<div className="mt-4">
 					<DocumentsList />
 					<Item onClick={handleCreate} icon={Plus} label="Add a page" />
-					Trash
+					<Popover>
+						<PopoverTrigger className="w-full mt-4">
+							<Item label="Trash" icon={Trash} />
+						</PopoverTrigger>
+						<PopoverContent
+							className="p-0 w-72"
+							side={isMobile ? "bottom" : "right"}
+						>
+							<TrashBox />
+						</PopoverContent>
+					</Popover>
 				</div>
 
 				<div
