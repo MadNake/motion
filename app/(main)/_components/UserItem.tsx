@@ -1,19 +1,27 @@
-"use client"
+"use client";
 
-import { Avatar, AvatarImage } from "@/components/ui/avatar"
-import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuSeparator, DropdownMenuTrigger } from "@/components/ui/dropdown-menu"
-import { SignOutButton, useUser } from "@clerk/clerk-react"
+import { Avatar, AvatarImage } from "@/components/ui/avatar";
+import {
+	DropdownMenu,
+	DropdownMenuContent,
+	DropdownMenuItem,
+	DropdownMenuSeparator,
+	DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
+import { SignOutButton, useUser } from "@clerk/clerk-react";
 
-import { ChevronsUpDown } from "lucide-react"
+import { ChevronsUpDown } from "lucide-react";
 
 export const UserItem = () => {
-
-	const { user } = useUser()
+	const { user } = useUser();
 
 	return (
 		<DropdownMenu>
 			<DropdownMenuTrigger asChild>
-				<div role="button" className="flex items-center text-sm p-3 w-full hover:bg-primary/5">
+				<div
+					role="button"
+					className="flex items-center text-sm p-3 w-full hover:bg-primary/5"
+				>
 					<div className="gap-x-2 flex items-center max-w-[150px]">
 						<Avatar className="h-5 w-5">
 							<AvatarImage src={user?.imageUrl} />
@@ -49,12 +57,13 @@ export const UserItem = () => {
 					</div>
 				</div>
 				<DropdownMenuSeparator />
-				<DropdownMenuItem asChild className="w-full cursor-pointer text-muted-foreground">
-					<SignOutButton>
-						Log out
-					</SignOutButton>
+				<DropdownMenuItem
+					asChild
+					className="w-full cursor-pointer text-muted-foreground"
+				>
+					<SignOutButton>Log out</SignOutButton>
 				</DropdownMenuItem>
 			</DropdownMenuContent>
 		</DropdownMenu>
-	)
-}
+	);
+};

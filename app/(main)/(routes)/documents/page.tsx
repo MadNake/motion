@@ -1,4 +1,4 @@
-"use client"
+"use client";
 
 import { Button } from "@/components/ui/button";
 import { PlusCircle } from "lucide-react";
@@ -11,21 +11,20 @@ import { api } from "@/convex/_generated/api";
 import { toast } from "sonner";
 
 const DocumentsPage = () => {
-
 	const { user } = useUser();
 	const create = useMutation(api.documents.create);
 
 	const onCreate = () => {
 		const promise = create({
-			title: "Untitled"
+			title: "Untitled",
 		});
 
 		toast.promise(promise, {
 			loading: "Creating a new note...",
 			success: "New note created!",
-			error: "Failed to create a new note."
+			error: "Failed to create a new note.",
 		});
-	}
+	};
 
 	return (
 		<div className="relative flex items-center justify-center h-full flex-col space-y-4">
@@ -43,18 +42,15 @@ const DocumentsPage = () => {
 				width={300}
 				className="object-contain hidden dark:block"
 			/>
-			<h2
-				className="text-lg font-medium">
+			<h2 className="text-lg font-medium">
 				Welcom to {user?.firstName}&apos;s Motion
 			</h2>
-			<Button
-				onClick={onCreate}
-			>
+			<Button onClick={onCreate}>
 				<PlusCircle className="h-4 w-4 mr-2" />
 				Create a note
 			</Button>
 		</div>
-	)
-}
+	);
+};
 
 export default DocumentsPage;

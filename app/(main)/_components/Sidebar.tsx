@@ -1,23 +1,28 @@
-"use client"
+"use client";
 
 import { ElementRef, useEffect, useRef, useState } from "react";
 import { usePathname } from "next/navigation";
-import { useMediaQuery } from "@/hooks/use-media-query"
+import { useMediaQuery } from "@/hooks/use-media-query";
 import { useMutation } from "convex/react";
 import { toast } from "sonner";
 
 import { cn } from "@/lib/utils";
 import { api } from "@/convex/_generated/api";
 
-import { ChevronsLeft, MenuIcon, Plus, PlusCircle, Search, Settings } from "lucide-react";
+import {
+	ChevronsLeft,
+	MenuIcon,
+	Plus,
+	PlusCircle,
+	Search,
+	Settings,
+} from "lucide-react";
 
 import { UserItem } from "./UserItem";
 import { DocumentsList } from "./DocumentsList";
 import { Item } from "./Item";
 
-
 export const Sidebar = () => {
-
 	const pathname = usePathname();
 
 	const isMobile = useMediaQuery("(max-width: 768px)");
@@ -37,7 +42,6 @@ export const Sidebar = () => {
 		} else {
 			resetWidth();
 		}
-		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [isMobile]);
 
 	useEffect(() => {
@@ -47,7 +51,7 @@ export const Sidebar = () => {
 	}, [pathname, isMobile]);
 
 	const handleMouseDown = (
-		event: React.MouseEvent<HTMLDivElement, MouseEvent>
+		event: React.MouseEvent<HTMLDivElement, MouseEvent>,
 	) => {
 		event.preventDefault();
 		event.stopPropagation();
@@ -116,56 +120,43 @@ export const Sidebar = () => {
 
 	const handleCreate = () => {
 		const promise = create({
-			title: "Untitled"
+			title: "Untitled",
 		});
 
 		toast.promise(promise, {
 			loading: "Creating a new note...",
 			success: "New note created!",
-			error: "Failed to create a new note."
+			error: "Failed to create a new note.",
 		});
-	}
+	};
 
 	return (
 		<>
 			<aside
 				ref={sidebarRef}
-				className={cn("bg-secondary w-60 flex flex-col relative group/sidebar overflow-y-auto z-[99999]",
+				className={cn(
+					"bg-secondary w-60 flex flex-col relative group/sidebar overflow-y-auto z-[99999]",
 					isMobile && "w-0",
-					isResetting && "transition-all ease-in-out duration-300")}>
+					isResetting && "transition-all ease-in-out duration-300",
+				)}
+			>
 				<div>
 					<div
 						role="button"
 						onClick={collapse}
-						className="absolute rounded-sm right-2 top-3 text-muted-foreground opacity-0 group-hover/sidebar:opacity-100 transition hover:bg-neutral-300 h-6 w-6 dark:hover:bg-neutral-600">
+						className="absolute rounded-sm right-2 top-3 text-muted-foreground opacity-0 group-hover/sidebar:opacity-100 transition hover:bg-neutral-300 h-6 w-6 dark:hover:bg-neutral-600"
+					>
 						<ChevronsLeft className="h-6 w-6" />
 					</div>
 					<UserItem />
-					<Item
-						onClick={() => {}}
-						label="Search"
-						icon={Search}
-						isSearch
-					/>
-					<Item
-						onClick={() => {}}
-						label="Settings"
-						icon={Settings}
-					/>
-					<Item
-						onClick={handleCreate}
-						label="New page"
-						icon={PlusCircle}
-					/>
+					<Item onClick={() => {}} label="Search" icon={Search} isSearch />
+					<Item onClick={() => {}} label="Settings" icon={Settings} />
+					<Item onClick={handleCreate} label="New page" icon={PlusCircle} />
 				</div>
 
 				<div className="mt-4">
 					<DocumentsList />
-					<Item
-						onClick={handleCreate}
-						icon={Plus}
-						label="Add a page"
-					/>
+					<Item onClick={handleCreate} icon={Plus} label="Add a page" />
 					Trash
 				</div>
 
@@ -178,23 +169,27 @@ export const Sidebar = () => {
 
 			<div
 				ref={navbarRef}
-				className={cn("absolute top-0 z-[99999] left-60 w-[calc(100%-240px)]",
+				className={cn(
+					"absolute top-0 z-[99999] left-60 w-[calc(100%-240px)]",
 					isResetting && "transition-all ease-in-out duration-300",
-					isMobile && "left-0 w-full"
+					isMobile && "left-0 w-full",
 				)}
 			>
-				<nav className={cn(
-					"bg-transparent px-3 py-2 w-full",
-					!isCollapsed && "hidden")}>
-					{
-						isCollapsed && <MenuIcon
+				<nav
+					className={cn(
+						"bg-transparent px-3 py-2 w-full",
+						!isCollapsed && "hidden",
+					)}
+				>
+					{isCollapsed && (
+						<MenuIcon
 							className="h-6 w-6 text-muted-foreground"
 							role="button"
 							onClick={resetWidth}
 						/>
-					}
+					)}
 				</nav>
 			</div>
 		</>
-	)
+	);
 };
