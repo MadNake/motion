@@ -2,7 +2,6 @@ import { Heading } from "./_components/Heading";
 import { Heroes } from "./_components/Heroes";
 import { Footer } from "./_components/Footer";
 
-
 const MarketingPage = () => {
 	return (
 		<div className="flex flex-col min-h-full dark:bg-[#1F1F1F]">
@@ -12,7 +11,7 @@ const MarketingPage = () => {
 			</div>
 			<Footer />
 		</div>
-	)
-}
+	);
+};
 
 export default MarketingPage;

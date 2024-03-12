@@ -1,5 +1,5 @@
-import { Button } from "@/components/ui/button"
-import { Logo } from "./Logo"
+import { Button } from "@/components/ui/button";
+import { Logo } from "./Logo";
 
 export const Footer = () => {
 	return (
@@ -8,19 +8,13 @@ export const Footer = () => {
 				<Logo />
 			</div>
 			<div className="flex justify-between w-full md:justify-end gap-x-2 flex-1 text-muted-foreground">
-				<Button
-					size="sm"
-					variant="ghost"
-				>
+				<Button size="sm" variant="ghost">
 					Privacy Policy
 				</Button>
-				<Button
-					size="sm"
-					variant="ghost"
-				>
+				<Button size="sm" variant="ghost">
 					Terms & Conditions
 				</Button>
 			</div>
 		</div>
-	)
-}
+	);
+};

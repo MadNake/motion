@@ -1,4 +1,4 @@
-import Image from "next/image"
+import Image from "next/image";
 
 export const Logo = () => {
 	return (
@@ -17,9 +17,7 @@ export const Logo = () => {
 				height={40}
 				className="hidden dark:block"
 			/>
-			<h1 className="font-semibold">
-				Motion
-			</h1>
+			<h1 className="font-semibold">Motion</h1>
 		</div>
-	)
-}
+	);
+};

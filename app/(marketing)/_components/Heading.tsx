@@ -1,20 +1,19 @@
-"use client"
-import { Spinner } from "@/components/spinner"
-import { Button } from "@/components/ui/button"
-import { SignInButton } from "@clerk/clerk-react"
-import { useConvexAuth } from "convex/react"
-import { ArrowRight } from "lucide-react"
-import Link from "next/link"
-
+"use client";
+import { Spinner } from "@/components/spinner";
+import { Button } from "@/components/ui/button";
+import { SignInButton } from "@clerk/clerk-react";
+import { useConvexAuth } from "convex/react";
+import { ArrowRight } from "lucide-react";
+import Link from "next/link";
 
 export const Heading = () => {
-
 	const { isLoading, isAuthenticated } = useConvexAuth();
 
 	return (
 		<div className="max-w-3xl space-y-4">
 			<h1 className="font-bold text-3xl sm:text-5xl md:text-6xl">
-				Your Ideas, Documents, & Plans. Unified. Welcome to <span className="underline">Motion</span>
+				Your Ideas, Documents, & Plans. Unified. Welcome to{" "}
+				<span className="underline">Motion</span>
 			</h1>
 			<h3 className="font-medium text-base sm:text-xl md:text-2xl">
 				Motion is the connected workspace where <br />
@@ -27,7 +26,7 @@ export const Heading = () => {
 				</div>
 			)}
 
-			{isAuthenticated && !isLoading &&(
+			{isAuthenticated && !isLoading && (
 				<Button asChild>
 					<Link href="/documents">
 						Enter Motion
@@ -44,7 +43,6 @@ export const Heading = () => {
 					</Button>
 				</SignInButton>
 			)}
-
 		</div>
-	)
-}
+	);
+};

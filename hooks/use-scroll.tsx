@@ -4,7 +4,6 @@ export const useScroll = (scrollPos = 10) => {
 	const [scrolled, setScrolled] = useState(false);
 
 	useEffect(() => {
-
 		const handleScroll = () => {
 			const scroll = window.scrollY > scrollPos ? true : false;
 			setScrolled(scroll);
@@ -15,9 +14,9 @@ export const useScroll = (scrollPos = 10) => {
 		window.addEventListener("scroll", handleScroll);
 
 		return () => {
-			window.removeEventListener("scroll", handleScroll)
-		}
-	}, [scrollPos])
+			window.removeEventListener("scroll", handleScroll);
+		};
+	}, [scrollPos]);
 
-	return scrolled
-}
+	return scrolled;
+};

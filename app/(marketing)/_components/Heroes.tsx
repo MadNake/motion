@@ -1,4 +1,4 @@
-import Image from "next/image"
+import Image from "next/image";
 
 export const Heroes = () => {
 	return (
@@ -36,5 +36,5 @@ export const Heroes = () => {
 				/>
 			</div>
 		</div>
-	)
-}
+	);
+};
