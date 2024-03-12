@@ -158,7 +158,10 @@ export const Sidebar = () => {
 					<div
 						role="button"
 						onClick={collapse}
-						className="absolute rounded-sm right-2 top-3 text-muted-foreground opacity-0 group-hover/sidebar:opacity-100 transition hover:bg-neutral-300 h-6 w-6 dark:hover:bg-neutral-600"
+						className={cn(
+							"absolute rounded-sm right-2 top-3 text-muted-foreground opacity-0 group-hover/sidebar:opacity-100 transition hover:bg-neutral-300 h-6 w-6 dark:hover:bg-neutral-600",
+							isMobile && "opacity-100",
+						)}
 					>
 						<ChevronsLeft className="h-6 w-6" />
 					</div>
