@@ -1,7 +1,7 @@
 "use client";
 
 import { ElementRef, useEffect, useRef, useState } from "react";
-import { useParams, usePathname } from "next/navigation";
+import { useParams, usePathname, useRouter } from "next/navigation";
 import { useMediaQuery } from "@/hooks/use-media-query";
 import { useMutation } from "convex/react";
 import { toast } from "sonner";
@@ -33,6 +33,7 @@ import { useSettings } from "@/hooks/use-settings";
 import { Navbar } from "./Navbar";
 
 export const Sidebar = () => {
+	const router = useRouter();
 	const search = useSearch();
 	const settings = useSettings();
 	const pathname = usePathname();
@@ -132,9 +133,9 @@ export const Sidebar = () => {
 	};
 
 	const handleCreate = () => {
-		const promise = create({
-			title: "Untitled",
-		});
+		const promise = create({ title: "Untitled" }).then((documentId) =>
+			router.push(`/documents/${documentId}`),
+		);
 
 		toast.promise(promise, {
 			loading: "Creating a new note...",
