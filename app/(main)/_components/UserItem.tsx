@@ -8,29 +8,45 @@ import {
 	DropdownMenuSeparator,
 	DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
+import { useMediaQuery } from "@/hooks/use-media-query";
+import { cn } from "@/lib/utils";
 import { SignOutButton, useUser } from "@clerk/clerk-react";
 
 import { ChevronsUpDown } from "lucide-react";
 
 export const UserItem = () => {
 	const { user } = useUser();
+	const isMobile = useMediaQuery("(max-width: 768px)");
 
 	return (
 		<DropdownMenu>
 			<DropdownMenuTrigger asChild>
 				<div
 					role="button"
-					className="flex items-center text-sm p-3 w-full hover:bg-primary/5"
+					className={cn(
+						"flex items-center text-sm p-3 w-full hover:bg-primary/5",
+						isMobile && "text-lg",
+					)}
 				>
-					<div className="gap-x-2 flex items-center max-w-[150px]">
-						<Avatar className="h-5 w-5">
+					<div
+						className={cn(
+							"gap-x-2 flex items-center max-w-[150px]",
+							isMobile && "max-w-[200px]",
+						)}
+					>
+						<Avatar className={cn("h-5 w-5", isMobile && "h-6 w-6")}>
 							<AvatarImage src={user?.imageUrl} />
 						</Avatar>
 						<span className="text-start font-medium line-clamp-1">
-							{user?.fullName}&apos;s Jotion
+							{user?.fullName}&apos;s Motion
 						</span>
 					</div>
-					<ChevronsUpDown className="ml-2 text-muted-foreground h-4 w-4" />
+					<ChevronsUpDown
+						className={cn(
+							"ml-2 text-muted-foreground h-4 w-4",
+							isMobile && "h-6 w-6",
+						)}
+					/>
 				</div>
 			</DropdownMenuTrigger>
 			<DropdownMenuContent

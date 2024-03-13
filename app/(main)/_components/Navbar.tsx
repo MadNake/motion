@@ -44,7 +44,7 @@ export const Navbar = ({ isCollapsed, onResetWidth }: NavbarProps) => {
 					<MenuIcon
 						role="button"
 						onClick={onResetWidth}
-						className="h-6 w-6 text-muted-foreground"
+						className="h-8 w-8 text-muted-foreground"
 					/>
 				)}
 				<div className="flex items-center justify-between w-full">

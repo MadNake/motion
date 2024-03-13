@@ -160,10 +160,10 @@ export const Sidebar = () => {
 						onClick={collapse}
 						className={cn(
 							"absolute rounded-sm right-2 top-3 text-muted-foreground opacity-0 group-hover/sidebar:opacity-100 transition hover:bg-neutral-300 h-6 w-6 dark:hover:bg-neutral-600",
-							isMobile && "opacity-100",
+							isMobile && "opacity-100 h-8 w-8",
 						)}
 					>
-						<ChevronsLeft className="h-6 w-6" />
+						<ChevronsLeft className={cn("h-6 w-6", isMobile && "h-8 w-8")} />
 					</div>
 					<UserItem />
 					<Item onClick={search.onOpen} label="Search" icon={Search} isSearch />

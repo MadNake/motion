@@ -57,12 +57,12 @@ export const Title = ({ initialData }: TitleProps) => {
 					onChange={onChange}
 					onKeyDown={onKeyDown}
 					value={title}
-					className="h-7 px-2 focus-visible:ring-transparent"
+					className="h-7 px-2 focus-visible:ring-transparent text-base"
 				/>
 			) : (
 				<Button
 					onClick={enableInput}
-					className="fontt-normal h-auto p-1"
+					className="font-medium h-auto p-1 text-base"
 					size="sm"
 					variant="ghost"
 				>

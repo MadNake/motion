@@ -9,6 +9,7 @@ import {
 import { Skeleton } from "@/components/ui/skeleton";
 import { api } from "@/convex/_generated/api";
 import { Id } from "@/convex/_generated/dataModel";
+import { useMediaQuery } from "@/hooks/use-media-query";
 import { cn } from "@/lib/utils";
 import { useUser } from "@clerk/clerk-react";
 import { useMutation } from "convex/react";
@@ -50,6 +51,8 @@ export const Item = ({
 }: ItemProps) => {
 	const router = useRouter();
 	const { user } = useUser();
+
+	const isMobile = useMediaQuery("(max-width: 768px)");
 
 	const create = useMutation(api.documents.create);
 	const archive = useMutation(api.documents.archive);
@@ -106,6 +109,7 @@ export const Item = ({
 			className={cn(
 				"group min-h-[27px] text-sm py-1 pr-3 w-full hover:bg-primary/5 flex items-center text-muted-foreground font-medium",
 				active && "bg-primary/5 text-primary",
+				isMobile && "text-lg",
 			)}
 		>
 			{!!id && (
@@ -114,18 +118,28 @@ export const Item = ({
 					className="h-full rounded-sm hover:bg-neutral-300 dark:hover:bg-neutral-600 mr-1"
 					onClick={handleExpand}
 				>
-					<ChevronIcon className="schrink-0 h-4 w-4 text-muted-foreground/50" />
+					<ChevronIcon
+						className={cn(
+							"schrink-0 h-4 w-4 text-muted-foreground/50",
+							isMobile && "h-6 w-6",
+						)}
+					/>
 				</div>
 			)}
 
 			{documentIcon ? (
 				<div className="schrink-0 mr-2 text-[18px]">{documentIcon}</div>
 			) : (
-				<Icon className="h-[18px] w-[18px] shrink-0 mr-2 text-muted-foreground" />
+				<Icon
+					className={cn(
+						"h-[18px] w-[18px] shrink-0 mr-2 text-muted-foreground",
+						isMobile && "h-6 w-6",
+					)}
+				/>
 			)}
 
 			<span className="truncate">{label}</span>
-			{isSearch && (
+			{isSearch && !isMobile && (
 				<kbd className="ml-auto pointer-events-none inline-flex h-5 select-none items-center gap-1 rounded border bg-muted px-1.5 font-mono text-[10px] font-medium text-muted-foreground opacity-100">
 					<span className="text-xs">CTRL</span>K
 				</kbd>
@@ -135,10 +149,18 @@ export const Item = ({
 					<DropdownMenu>
 						<DropdownMenuTrigger asChild onClick={(e) => e.stopPropagation()}>
 							<div
-								className="opacity-0 group-hover:opacity-100 rounded-sm hover:bg-neutral-300 dark:hover:bg-neutral-600 h-full ml-auto"
+								className={cn(
+									"opacity-0 group-hover:opacity-100 rounded-sm hover:bg-neutral-300 dark:hover:bg-neutral-600 h-full ml-auto",
+									isMobile && "opacity-100",
+								)}
 								role="button"
 							>
-								<MoreHorizontal className="h-4 w-4 text-muted-foreground" />
+								<MoreHorizontal
+									className={cn(
+										"h-4 w-4 text-muted-foreground",
+										isMobile && "w-6 h-6",
+									)}
+								/>
 							</div>
 						</DropdownMenuTrigger>
 						<DropdownMenuContent
@@ -160,9 +182,17 @@ export const Item = ({
 					<div
 						role="button"
 						onClick={onCreate}
-						className="opacity-0 group-hover:opacity-100 h-full ml-auto rounded-sm hover:bg-neutral-300 dark:hover:bg-neutral-600"
+						className={cn(
+							"opacity-0 group-hover:opacity-100 h-full ml-auto rounded-sm hover:bg-neutral-300 dark:hover:bg-neutral-600",
+							isMobile && "opacity-100",
+						)}
 					>
-						<Plus className="h-4 w-4 text-muted-foreground" />
+						<Plus
+							className={cn(
+								"h-4 w-4 text-muted-foreground",
+								isMobile && "w-6 h-6",
+							)}
+						/>
 					</div>
 				</div>
 			)}
