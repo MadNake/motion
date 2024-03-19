@@ -1,3 +1,5 @@
+import { Analytics } from "@vercel/analytics/react";
+
 import { Toaster } from "sonner";
 import { Inter } from "next/font/google";
 import type { Metadata } from "next";
@@ -52,6 +54,7 @@ export default function RootLayout({
 						</ThemeProvider>
 					</EdgeStoreProvider>
 				</ConvexClientProvider>
+				<Analytics />
 			</body>
 		</html>
 	);
