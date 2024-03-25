@@ -1,10 +1,11 @@
 "use client";
 import { Spinner } from "@/components/spinner";
 import { Button } from "@/components/ui/button";
-import { SignInButton } from "@clerk/clerk-react";
+// import { SignInButton } from "@clerk/clerk-react";
 import { useConvexAuth } from "convex/react";
 import { ArrowRight } from "lucide-react";
 import Link from "next/link";
+import { LoginButton } from "./LoginButton";
 
 export const Heading = () => {
 	const { isLoading, isAuthenticated } = useConvexAuth();
@@ -36,12 +37,15 @@ export const Heading = () => {
 			)}
 
 			{!isLoading && !isAuthenticated && (
-				<SignInButton mode="modal">
-					<Button>
-						Get Motion free
-						<ArrowRight className="h-4 w-4 ml-2" />
-					</Button>
-				</SignInButton>
+				// <SignInButton mode="modal">
+				// 	<Button>
+				// 		Get Motion free
+				// 		<ArrowRight className="h-4 w-4 ml-2" />
+				// 	</Button>
+				// </SignInButton>
+				<LoginButton text="Get Motion free">
+					<ArrowRight className="h-4 w-4 ml-2" />
+				</LoginButton>
 			)}
 		</div>
 	);

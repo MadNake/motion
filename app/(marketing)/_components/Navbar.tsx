@@ -1,18 +1,31 @@
 "use client";
+// import {
+// 	Popover,
+// 	PopoverContent,
+// 	PopoverTrigger,
+// } from "@/components/ui/popover";
 
 import { Button } from "@/components/ui/button";
 import { Logo } from "./Logo";
 import { ModeToggle } from "@/components/mode-togle";
 import { cn } from "@/lib/utils";
 import { useScroll } from "@/hooks/use-scroll";
-import { SignInButton, UserButton } from "@clerk/clerk-react";
+import { UserButton } from "@clerk/clerk-react";
 import { useConvexAuth } from "convex/react";
 import Link from "next/link";
 import { Spinner } from "@/components/spinner";
+// import { useState } from "react";
+import { LoginButton } from "./LoginButton";
 
 export const Navbar = () => {
 	const scrollPos = useScroll(10);
 	const { isLoading, isAuthenticated } = useConvexAuth();
+
+	// const [preventDefault, setPreventDefault] = useState(true);
+
+	// const onClosePopover = () => {
+	// 	setPreventDefault(false);
+	// };
 
 	return (
 		<div
@@ -27,14 +40,11 @@ export const Navbar = () => {
 
 				{!isAuthenticated && !isLoading && (
 					<>
-						<SignInButton mode="modal">
-							<Button size="sm" variant="ghost">
-								Log in
-							</Button>
-						</SignInButton>
-						<SignInButton mode="modal">
+						<LoginButton text="Log in" buttonVariant="ghost" />
+						<LoginButton text="Get Motion free" />
+						{/* <SignInButton mode="modal">
 							<Button size="sm">Get Motion free</Button>
-						</SignInButton>
+						</SignInButton> */}
 					</>
 				)}
 
